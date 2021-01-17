@@ -1,4 +1,5 @@
 import React from 'react';
+// eslint-disable-next-line no-undef
 class MouseCoord extends Component{
   constructor(props){
     super(props);
