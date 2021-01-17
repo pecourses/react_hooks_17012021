@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import reducer from './reducer';
 
@@ -40,4 +40,31 @@ const data = {
     },
   ],
 };
-const getDate = () => data;
+const getData = () => data;
+
+function Chat(props) {
+  const [state, dispatch] = useReducer(reducer,{
+    users: new Map(),
+    messages: [],
+  });
+
+  useEffect(() => {
+    const data = getData();
+    dispatch({
+      type: 'GET_SUCCESS',
+      data,
+    });
+  }, []);
+
+  const {messages} = state;
+  
+  return(
+    <ul>
+      {messages.map((i,index) => (
+        <li key={index}>{JSON.stringify(i)}</li>
+      ))}
+    </ul>
+  );  
+}
+
+export default Chat;
